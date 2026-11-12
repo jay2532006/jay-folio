@@ -65,7 +65,7 @@ export default function ResumeDossier() {
         }}
       />
 
-      {/* Floating Chapter Index Nav - Centered across full screen */}
+      {/* Floating Chapter Index Nav - Desktop */}
       <nav
         aria-label="Dossier section navigation"
         className="sticky top-6 z-40 mx-auto max-w-max hidden md:flex items-center gap-2 rounded-full border border-white/15 bg-[#0d0d12]/90 backdrop-blur-2xl px-6 py-3 shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
@@ -117,8 +117,39 @@ export default function ResumeDossier() {
         </a>
       </nav>
 
-      {/* Main Container - EXPANDED to full monitor width (up to 1920px fluid) */}
-      <div className="relative z-10 w-full max-w-[1880px] mx-auto px-6 sm:px-10 md:px-14 lg:px-16 xl:px-24 2xl:px-32 py-24 sm:py-32 md:py-48 space-y-40 sm:space-y-48 md:space-y-64">
+      {/* Floating Chapter Index Nav - Mobile Scrollable Strip */}
+      <nav
+        aria-label="Dossier mobile navigation"
+        className="sticky top-4 z-40 mx-3 flex md:hidden items-center gap-2 rounded-full border border-white/15 bg-[#0d0d12]/95 backdrop-blur-2xl px-3 py-2 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden shadow-2xl"
+      >
+        <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#c8a882] shrink-0 font-bold pl-1 pr-2 border-r border-white/10">
+          Index
+        </span>
+        <a href="#dossier-overview" className="text-[11px] font-mono text-neutral-300 hover:text-white px-2.5 py-1 rounded-full bg-white/[0.04] shrink-0">
+          Overview
+        </a>
+        <a href="#dossier-education" className="text-[11px] font-mono text-neutral-300 hover:text-white px-2.5 py-1 rounded-full bg-white/[0.04] shrink-0">
+          Academics
+        </a>
+        <a href="#dossier-experience" className="text-[11px] font-mono text-neutral-300 hover:text-white px-2.5 py-1 rounded-full bg-white/[0.04] shrink-0">
+          Experience
+        </a>
+        <a href="#dossier-builds" className="text-[11px] font-mono text-neutral-300 hover:text-white px-2.5 py-1 rounded-full bg-white/[0.04] shrink-0">
+          Systems
+        </a>
+        <a href="#dossier-honors" className="text-[11px] font-mono text-neutral-300 hover:text-white px-2.5 py-1 rounded-full bg-white/[0.04] shrink-0">
+          Honors
+        </a>
+        <a href="#dossier-credentials" className="text-[11px] font-mono text-neutral-300 hover:text-white px-2.5 py-1 rounded-full bg-white/[0.04] shrink-0">
+          Certs
+        </a>
+        <a href="#dossier-skills" className="text-[11px] font-mono text-neutral-300 hover:text-white px-2.5 py-1 rounded-full bg-white/[0.04] shrink-0">
+          Skills
+        </a>
+      </nav>
+
+      {/* Main Container - EXPANDED to full monitor width (up to 1920px fluid) with phone-friendly padding */}
+      <div className="relative z-10 w-full max-w-[1880px] mx-auto px-4 sm:px-8 md:px-14 lg:px-16 xl:px-24 2xl:px-32 py-16 sm:py-24 md:py-40 space-y-24 sm:space-y-36 md:space-y-56">
 
         {/* =====================================================================
             CHAPTER 01: EXECUTIVE PROFILE & HERO (LEFT + RIGHT FULL-WIDTH)
@@ -172,12 +203,12 @@ export default function ResumeDossier() {
               </div>
 
               {/* Direct Action Links */}
-              <div className="flex flex-wrap items-center gap-5 pt-3">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-5 pt-3">
                 <a
                   href={SITE.resumeUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 rounded-full bg-[#c8a882] px-8 py-4 text-xs font-mono font-bold uppercase tracking-[0.18em] text-[#0a0a0c] hover:bg-white shadow-[0_15px_35px_-10px_rgba(200,168,130,0.5)] transition-all hover:scale-[1.02]"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 rounded-full bg-[#c8a882] px-6 sm:px-8 py-3.5 sm:py-4 text-xs font-mono font-bold uppercase tracking-[0.18em] text-[#0a0a0c] hover:bg-white shadow-[0_15px_35px_-10px_rgba(200,168,130,0.5)] transition-all hover:scale-[1.02]"
                 >
                   <FileText className="h-4 w-4" />
                   Download Complete Resume (PDF)
@@ -185,7 +216,7 @@ export default function ResumeDossier() {
                 </a>
                 <Link
                   href="/articles"
-                  className="inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/[0.04] px-8 py-4 text-xs font-mono uppercase tracking-[0.18em] text-white hover:border-[#c8a882] hover:bg-white/[0.08] transition-all hover:scale-[1.02]"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 rounded-full border border-white/20 bg-white/[0.04] px-6 sm:px-8 py-3.5 sm:py-4 text-xs font-mono uppercase tracking-[0.18em] text-white hover:border-[#c8a882] hover:bg-white/[0.08] transition-all hover:scale-[1.02]"
                 >
                   <BookOpen className="h-4 w-4 text-[#c8a882]" />
                   Read 13 Field Essays

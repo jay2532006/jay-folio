@@ -13,6 +13,7 @@ import CardCarouselDemo from "@/components/ui/card-carousel-demo";
 import LightRays from "@/components/ui/LightRays";
 import ZoomParallaxDemo from "@/components/ui/zoom-parallax-demo";
 import ResumeDossier from "@/components/ui/resume-dossier";
+import QuickConnectHero from "@/components/ui/quick-connect-hero";
 import ProfileCard from "@/components/ui/ProfileCard";
 import FooterDemo from "@/components/ui/footer-demo";
 import { ScrollReveal } from "@/components/animations/ScrollReveal";
@@ -40,6 +41,8 @@ export default function Home() {
       >
         <VSCodePortfolio />
       </FrameToFullscreen>
+
+      <QuickConnectHero />
 
       <ScrollRevealCurtain
         curtainColor="#fd5200"

@@ -426,7 +426,7 @@ export const VSCodePortfolio: React.FC = () => {
         </div>
 
         {/* Explorer */}
-        <div className="w-[210px] bg-[#0a0a0a] border-r border-[#1a1a1a] shrink-0 flex flex-col">
+        <div className="hidden md:flex w-[210px] bg-[#0a0a0a] border-r border-[#1a1a1a] shrink-0 flex-col">
           <div className="flex items-center justify-between px-3 pt-3 pb-2">
             <span className="text-[11px] tracking-[0.12em] text-[#9a9a9a]">EXPLORER</span>
             <span className="text-[#6f6f6f]">⋯</span>
@@ -465,9 +465,9 @@ export const VSCodePortfolio: React.FC = () => {
             </div>
 
             {/* Editor body */}
-            <div className="flex-1 overflow-auto px-20 pt-20 pb-16 min-w-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-              <p className="text-[22px] text-[#cfcfcf]" style={{ marginTop: "12px", marginLeft: "24px", marginBottom: "4px" }}>Hi, I&apos;m</p>
-              <h1 className="text-[104px] leading-[1.05] font-bold tracking-tight" style={{ marginBottom: "16px", marginLeft: "24px" }}>
+            <div className="flex-1 overflow-auto px-4 sm:px-10 md:px-16 lg:px-20 pt-6 sm:pt-12 md:pt-20 pb-16 min-w-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              <p className="text-base sm:text-[22px] text-[#cfcfcf]" style={{ marginTop: "12px", marginLeft: "clamp(8px, 2vw, 24px)", marginBottom: "4px" }}>Hi, I&apos;m</p>
+              <h1 className="text-4xl sm:text-6xl md:text-8xl lg:text-[104px] leading-[1.05] font-bold tracking-tight" style={{ marginBottom: "16px", marginLeft: "clamp(8px, 2vw, 24px)" }}>
                 <TextType
                   as="span"
                   text="Jay Parmar"
@@ -501,21 +501,21 @@ export const VSCodePortfolio: React.FC = () => {
                   }
                 />
               </h1>
-              <div className="flex items-center text-[15px] text-[#cfcfcf]" style={{ marginBottom: "0px" , marginLeft: "24px"}}>
-                <svg viewBox="0 0 16 16" className="w-4 h-4 mr-1.5 text-[#a78bfa]" fill="currentColor"><path d="M4 1h6l3 3v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Z"/></svg>
+              <div className="flex flex-wrap items-center gap-y-1 text-[13px] sm:text-[15px] text-[#cfcfcf]" style={{ marginBottom: "0px" , marginLeft: "clamp(8px, 2vw, 24px)"}}>
+                <svg viewBox="0 0 16 16" className="w-4 h-4 mr-1.5 text-[#a78bfa] shrink-0" fill="currentColor"><path d="M4 1h6l3 3v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Z"/></svg>
                 <span className="text-[#a78bfa]">AI/ML Builder · Finance Analyst · Product Leader</span>
-                <span className="text-[#6f6f6f] mx-2">•</span>
-                <span>BBA, IIM Bangalore</span>
+                <span className="text-[#6f6f6f] mx-2 hidden sm:inline">•</span>
+                <span className="block sm:inline">BBA, IIM Bangalore</span>
               </div>
-              <p className="text-[15px] text-[#cbd5e1] max-w-[640px]" style={{ marginBottom: "40px", marginLeft: "24px"}}>turning complex data into decisions that move.</p>
+              <p className="text-sm sm:text-[15px] text-[#cbd5e1] max-w-[640px]" style={{ marginBottom: "40px", marginLeft: "clamp(8px, 2vw, 24px)"}}>turning complex data into decisions that move.</p>
 
               {/* Code block — Safari-framed */}
               <Safari_01
                 url="jayparmar.in/profile.ts"
-                className="mb-12 max-w-[820px]"
-                style={{ marginLeft: "24px", marginRight: "24px", marginBottom: "24px" }}
+                className="mb-12 max-w-[820px] w-full"
+                style={{ marginInline: "clamp(8px, 2vw, 24px)", marginBottom: "24px" }}
               >
-                <pre className="px-10 py-9 leading-[2.1] tracking-[0.01em] overflow-hidden font-mono text-[13.5px]">
+                <pre className="px-5 sm:px-10 py-6 sm:py-9 leading-[2] sm:leading-[2.1] tracking-[0.01em] overflow-x-auto font-mono text-[11px] sm:text-[13.5px]">
 {[
 "const builder = {",
 '  name: "Jay Parmar",',
@@ -534,8 +534,8 @@ export const VSCodePortfolio: React.FC = () => {
 
               {/* Buttons */}
               <div
-                className="flex items-center justify-center"
-                style={{ gap: "28px", marginBottom: "96px", marginTop: "8px" }}
+                className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-7"
+                style={{ marginBottom: "96px", marginTop: "8px" }}
               >
                 <ButtonCta
                   className="min-w-[200px]"
@@ -662,10 +662,9 @@ export const VSCodePortfolio: React.FC = () => {
             </div>
           </div>
 
-          {/* Right panel */}
+          {/* Right panel — hidden on mobile and tablets to let editor take full width */}
           <aside
-            className="w-[400px] bg-[#0a0a0a] border-l border-[#1a1a1a] shrink-0 overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-            style={{ padding: "44px 32px 40px" }}
+            className="hidden xl:flex flex-col w-[380px] bg-[#0a0a0a] border-l border-[#1a1a1a] shrink-0 overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden p-8"
           >
             <div style={{ display: "flex", flexDirection: "column", gap: "44px" }}>
 
