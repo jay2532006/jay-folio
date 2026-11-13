@@ -114,8 +114,8 @@ export const HeroParallax = ({
 export const Header = () => {
   return (
     <div
-      className="max-w-7xl relative mx-auto py-20 md:py-40 px-4 w-full left-0 top-0"
-      style={{ paddingTop: "25vh", paddingLeft: "15vh", marginBottom: "20px" }}
+      className="max-w-7xl relative mx-auto py-16 md:py-40 px-6 sm:px-10 md:pl-[12vw] lg:pl-[15vh] w-full left-0 top-0"
+      style={{ paddingTop: "18vh", marginBottom: "20px" }}
     >
       {/* Eyebrow / kicker */}
       <div

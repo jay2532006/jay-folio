@@ -92,7 +92,7 @@ const LightRays = ({
   const animationIdRef = useRef<number | null>(null);
   const meshRef = useRef<Mesh | null>(null);
   const cleanupFunctionRef = useRef<(() => void) | null>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const isVisibleRef = useRef(true);
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
@@ -100,9 +100,9 @@ const LightRays = ({
     observerRef.current = new IntersectionObserver(
       (entries) => {
         const entry = entries[0];
-        setIsVisible(entry.isIntersecting);
+        isVisibleRef.current = entry.isIntersecting;
       },
-      { threshold: 0.1 }
+      { threshold: 0.05 }
     );
     observerRef.current.observe(containerRef.current);
     return () => {
@@ -114,7 +114,7 @@ const LightRays = ({
   }, []);
 
   useEffect(() => {
-    if (!isVisible || !containerRef.current) return;
+    if (!containerRef.current) return;
 
     if (cleanupFunctionRef.current) {
       cleanupFunctionRef.current();
@@ -126,11 +126,11 @@ const LightRays = ({
       await new Promise((resolve) => setTimeout(resolve, 10));
       if (!containerRef.current) return;
 
-      // Cap DPR at 1.5 — on retina screens (DPR 2-3) the fragment shader runs
-      // at 4-9x the pixel count for a backdrop the eye reads as a soft gold
-      // wash. 1.5 keeps the gradient indistinguishable and halves shader cost.
+      // Cap DPR at 1.0 on mobile / 1.5 on desktop — keeps gradient indistinguishable while avoiding 4-9x fragment shader load
+      const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+      const targetDpr = isMobile ? 1.0 : 1.5;
       const renderer = new Renderer({
-        dpr: Math.min(window.devicePixelRatio, 1.5),
+        dpr: Math.min(window.devicePixelRatio || 1, targetDpr),
         alpha: true,
       });
       rendererRef.current = renderer;
@@ -302,9 +302,12 @@ void main() {
           return;
         }
 
-        // Skip the entire frame if the tab is hidden — no point burning GPU
+        // Skip the entire frame if the tab is hidden or canvas is off-screen — no point burning GPU
         // for an offscreen canvas.
-        if (typeof document !== "undefined" && document.hidden) {
+        if (
+          !isVisibleRef.current ||
+          (typeof document !== "undefined" && document.hidden)
+        ) {
           animationIdRef.current = requestAnimationFrame(loop);
           return;
         }
@@ -378,7 +381,6 @@ void main() {
       }
     };
   }, [
-    isVisible,
     raysOrigin,
     raysColor,
     raysSpeed,

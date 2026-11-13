@@ -69,19 +69,19 @@ export function SplineSceneBasic() {
         />
       )}
 
-      <div className="flex h-full">
-        <div className="flex-1 py-16 relative z-10 flex flex-col justify-center items-end pr-12 pointer-events-none">
+      <div className="flex flex-col md:flex-row h-full">
+        <div className="flex-1 py-12 md:py-16 relative z-10 flex flex-col justify-center items-center md:items-end px-6 sm:px-10 md:pr-12 pointer-events-none text-center md:text-right">
           <div className="max-w-lg w-full">
-          <h1 className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400">
             Decisions That Move.
           </h1>
-          <p className="mt-6 text-lg text-neutral-300">
+          <p className="mt-4 md:mt-6 text-base md:text-lg text-neutral-300">
             I’m Jay Parmar — an AI/ML builder, finance analyst, and product leader at IIM Bangalore. I build useful systems, rally people around ambitious ideas, and stay with the work until it creates a real outcome.
           </p>
           </div>
         </div>
 
-        <div className="flex-1 relative pointer-events-auto">
+        <div className="flex-1 relative pointer-events-auto min-h-[350px] md:min-h-0">
           {loadScene && (
             <SplineScene
               scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"

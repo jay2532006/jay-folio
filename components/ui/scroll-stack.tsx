@@ -233,10 +233,12 @@ const ScrollStack = ({
       return lenis;
     }
     const scroller = scrollerRef.current;
-    if (!scroller) return;
+    if (!scroller || scroller.offsetParent === null) return;
+    const inner = scroller.querySelector(".scroll-stack-inner") as HTMLElement;
+    if (!inner) return;
     const lenis = new Lenis({
       wrapper: scroller,
-      content: scroller.querySelector(".scroll-stack-inner") as HTMLElement,
+      content: inner,
       ...baseOptions,
     } as unknown as ConstructorParameters<typeof Lenis>[0]);
     lenis.on("scroll", handleScroll);

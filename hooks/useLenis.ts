@@ -13,13 +13,22 @@ export function getLenis() {
 
 export function useLenis() {
   useEffect(() => {
+    // Detect touch / mobile devices. Native touch momentum on mobile devices runs
+    // on the hardware compositor thread (up to 120Hz). Hijacking touch events with
+    // virtual JS interpolation causes "hard scroll" and input lag on phones.
+    const isCoarse =
+      typeof window !== "undefined" &&
+      window.matchMedia("(pointer: coarse)").matches;
+
     const lenis = new Lenis({
-      duration: 0.8,
+      duration: 1.0,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: "vertical",
       smoothWheel: true,
-      wheelMultiplier: 1.3,
-      touchMultiplier: 2,
+      wheelMultiplier: 1.1,
+      // On touch devices, disable JS touch virtualization so phones use 100% fluid native momentum
+      touchMultiplier: 1,
+      syncTouch: false,
     });
 
     lenisInstance = lenis;
@@ -30,7 +39,9 @@ export function useLenis() {
     };
 
     gsap.ticker.add(tick);
-    gsap.ticker.lagSmoothing(0);
+    // Restore GSAP lag smoothing: smoothly dampen timeline when frames take longer than 33ms
+    // (disabling lag smoothing with 0 causes violent frame jumping and visual stutter).
+    gsap.ticker.lagSmoothing(500, 33);
 
     return () => {
       gsap.ticker.remove(tick);
