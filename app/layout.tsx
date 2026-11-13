@@ -5,6 +5,7 @@ import { SmoothScrollProvider } from "@/components/animations/SmoothScrollProvid
 import { MouseFollower } from "@/components/animations/MouseFollower";
 import { PageReveal } from "@/components/animations/PageTransition";
 import { AssetPreloader } from "@/components/animations/AssetPreloader";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-display",
@@ -73,6 +74,7 @@ export default function RootLayout({
           <MouseFollower />
           {children}
         </SmoothScrollProvider>
+        <SpeedInsights />
       </body>
     </html>
   );
