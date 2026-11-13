@@ -24,10 +24,10 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
 export function PageReveal() {
   return (
     <motion.div
-      className="fixed inset-0 z-[999] bg-black pointer-events-none"
+      className="fixed inset-0 z-[999] bg-black pointer-events-none hidden md:block"
       initial={{ scaleY: 1, transformOrigin: "bottom" }}
       animate={{ scaleY: 0, transformOrigin: "top" }}
-      transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1], delay: 0.1 }}
+      transition={{ duration: 1.0, ease: [0.76, 0, 0.24, 1], delay: 0.1 }}
     />
   );
 }

@@ -25,7 +25,6 @@ export const ScrollFoldTransition: React.FC<Props> = ({
   bottomColor = "#1a1a1a",
   scrollDistance = "+=280%",
 }) => {
-  const sectionVh = 100 + (parseInt(scrollDistance.replace(/[^0-9]/g, ""), 10) || 280);
   const sectionRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const topRef = useRef<HTMLDivElement>(null);
@@ -34,12 +33,18 @@ export const ScrollFoldTransition: React.FC<Props> = ({
   const labelRef = useRef<HTMLDivElement>(null);
   const linesRef = useRef<HTMLDivElement>(null);
   const dustRef = useRef<HTMLDivElement>(null);
+  const [computedVh, setComputedVh] = React.useState("280vh");
 
   useLayoutEffect(() => {
     if (!sectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      gsap.set(stageRef.current, { perspective: 2000 });
+      const isMobile = window.innerWidth < 768;
+      const effectiveDist = isMobile ? "+=30%" : scrollDistance;
+      const parsedExtra = parseInt(effectiveDist.replace(/[^0-9]/g, ""), 10) || (isMobile ? 30 : 280);
+      setComputedVh(`${100 + parsedExtra}vh`);
+
+      gsap.set(stageRef.current, { perspective: isMobile ? 1200 : 2000 });
 
       gsap.set(topRef.current, {
         transformOrigin: "50% 100%",
@@ -78,8 +83,8 @@ export const ScrollFoldTransition: React.FC<Props> = ({
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top top",
-          end: scrollDistance,
-          scrub: 0.4,
+          end: effectiveDist,
+          scrub: isMobile ? 0.35 : 0.6,
           pin: stageRef.current,
           pinSpacing: true,
           anticipatePin: 1,
@@ -178,7 +183,7 @@ export const ScrollFoldTransition: React.FC<Props> = ({
     <section
       ref={sectionRef}
       className="relative w-full"
-      style={{ height: `${sectionVh}vh` }}
+      style={{ height: computedVh }}
       aria-label="Page fold transition"
     >
       <div

@@ -20,7 +20,6 @@ export const ScrollRevealCurtain: React.FC<Props> = ({
   label,
   scrollDistance = "+=220%",
 }) => {
-  const sectionVh = 100 + (parseInt(scrollDistance.replace(/[^0-9]/g, ""), 10) || 220);
   const sectionRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const beneathRef = useRef<HTMLDivElement>(null);
@@ -28,12 +27,18 @@ export const ScrollRevealCurtain: React.FC<Props> = ({
   const labelRef = useRef<HTMLDivElement>(null);
   const shardRef = useRef<HTMLDivElement>(null);
   const dimRef = useRef<HTMLDivElement>(null);
+  const [computedVh, setComputedVh] = React.useState("220vh");
 
   useLayoutEffect(() => {
     if (!sectionRef.current || !curtainRef.current) return;
 
     const ctx = gsap.context(() => {
-      gsap.set(stageRef.current, { perspective: 1600 });
+      const isMobile = window.innerWidth < 768;
+      const effectiveDist = isMobile ? "+=35%" : scrollDistance;
+      const parsedExtra = parseInt(effectiveDist.replace(/[^0-9]/g, ""), 10) || (isMobile ? 35 : 220);
+      setComputedVh(`${100 + parsedExtra}vh`);
+
+      gsap.set(stageRef.current, { perspective: isMobile ? 1000 : 1600 });
 
       gsap.set(beneathRef.current, {
         transformOrigin: "50% 50%",
@@ -58,8 +63,8 @@ export const ScrollRevealCurtain: React.FC<Props> = ({
 
       gsap.set(labelRef.current, {
         opacity: 0,
-        y: 40,
-        scale: 0.96,
+        y: isMobile ? 24 : 40,
+        scale: isMobile ? 0.98 : 0.96,
       });
 
       const tl = gsap.timeline({
@@ -67,8 +72,8 @@ export const ScrollRevealCurtain: React.FC<Props> = ({
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top top",
-          end: scrollDistance,
-          scrub: 0.75,
+          end: effectiveDist,
+          scrub: isMobile ? 0.4 : 0.75,
           pin: stageRef.current,
           pinSpacing: true,
           anticipatePin: 1,
@@ -126,7 +131,7 @@ export const ScrollRevealCurtain: React.FC<Props> = ({
     <section
       ref={sectionRef}
       className="relative w-full"
-      style={{ height: `${sectionVh}vh` }}
+      style={{ height: computedVh }}
       aria-label="Scroll transition"
     >
       <div

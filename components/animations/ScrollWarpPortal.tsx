@@ -22,7 +22,6 @@ export const ScrollWarpPortal: React.FC<Props> = ({
   accent = "#c8a882",
   scrollDistance = "+=260%",
 }) => {
-  const sectionVh = 100 + (parseInt(scrollDistance.replace(/[^0-9]/g, ""), 10) || 260);
   const sectionRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const vignetteRef = useRef<HTMLDivElement>(null);
@@ -31,12 +30,18 @@ export const ScrollWarpPortal: React.FC<Props> = ({
   const haloRef = useRef<HTMLDivElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
   const beamsRef = useRef<HTMLDivElement>(null);
+  const [computedVh, setComputedVh] = React.useState("260vh");
 
   useLayoutEffect(() => {
     if (!sectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      gsap.set(stageRef.current, { perspective: 1600 });
+      const isMobile = window.innerWidth < 768;
+      const effectiveDist = isMobile ? "+=30%" : scrollDistance;
+      const parsedExtra = parseInt(effectiveDist.replace(/[^0-9]/g, ""), 10) || (isMobile ? 30 : 260);
+      setComputedVh(`${100 + parsedExtra}vh`);
+
+      gsap.set(stageRef.current, { perspective: isMobile ? 1000 : 1600 });
 
       const frameEls = framesRef.current
         ? Array.from(framesRef.current.children)
@@ -86,8 +91,8 @@ export const ScrollWarpPortal: React.FC<Props> = ({
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top top",
-          end: scrollDistance,
-          scrub: 0.5,
+          end: effectiveDist,
+          scrub: isMobile ? 0.35 : 0.6,
           pin: stageRef.current,
           pinSpacing: true,
           anticipatePin: 1,
@@ -240,7 +245,7 @@ export const ScrollWarpPortal: React.FC<Props> = ({
     <section
       ref={sectionRef}
       className="relative w-full"
-      style={{ height: `${sectionVh}vh` }}
+      style={{ height: computedVh }}
       aria-label="Warp transition"
     >
       <div

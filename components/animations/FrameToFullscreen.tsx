@@ -17,6 +17,7 @@ export const FrameToFullscreen: React.FC<Props> = ({ titleComponent, children })
   const frameRef = useRef<HTMLDivElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
+  const [sectionHeight, setSectionHeight] = React.useState("210vh");
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -35,41 +36,50 @@ export const FrameToFullscreen: React.FC<Props> = ({ titleComponent, children })
       ctx = gsap.context(() => {
         const vw = window.innerWidth;
         const vh = window.innerHeight;
+        const isMobile = vw < 768;
 
-        // Card visual target dimensions (same as original CSS width/height constraints)
-        const targetW = Math.min(vw * 0.82, 1320);
-        const targetH = Math.min(vh * 0.58, 700);
+        setSectionHeight(isMobile ? "135vh" : "210vh");
+
+        // Card visual target dimensions
+        const targetW = isMobile ? vw * 0.94 : Math.min(vw * 0.82, 1320);
+        const targetH = isMobile ? vh * 0.68 : Math.min(vh * 0.58, 700);
 
         // Required scale ratios to map 100vw/100vh down to card size
         const startScaleX = targetW / vw;
         const startScaleY = targetH / vh;
 
-        // Vertical offset to visually mimic the old pb-[6vh] padding
-        const padBottom = vh * 0.06;
+        // Vertical offset to visually mimic padding
+        const padBottom = isMobile ? vh * 0.02 : vh * 0.06;
 
-        // Pre-configure initial card transforms (scaled down and tilted)
+        // On mobile, use subtle 6deg tilt & 0.96 scale so phones don't drop frames on heavy 3D matrix math
+        const initialRotateX = isMobile ? 6 : 26;
+        const initialScaleMult = isMobile ? 0.96 : 0.86;
+        const scrollDist = isMobile ? "+=35%" : "+=110%";
+        const scrubTime = isMobile ? 0.4 : 0.8;
+
+        // Pre-configure initial card transforms
         gsap.set(frameRef.current, {
-          transformPerspective: 1600,
+          transformPerspective: isMobile ? 1000 : 1600,
           transformOrigin: "50% 100%",
-          rotateX: 26,
-          scaleX: startScaleX * 0.86,
-          scaleY: startScaleY * 0.86,
-          y: 70 - padBottom,
-          borderWidth: 4,
-          padding: 16,
-          borderRadius: 28,
+          rotateX: initialRotateX,
+          scaleX: startScaleX * initialScaleMult,
+          scaleY: startScaleY * initialScaleMult,
+          y: (isMobile ? 30 : 70) - padBottom,
+          borderWidth: isMobile ? 2 : 4,
+          padding: isMobile ? 8 : 16,
+          borderRadius: isMobile ? 18 : 28,
         });
 
         gsap.set(innerRef.current, {
-          borderRadius: 16,
+          borderRadius: isMobile ? 12 : 16,
         });
 
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "top top",
-            end: "+=110%",
-            scrub: 0.8,
+            end: scrollDist,
+            scrub: scrubTime,
             pin: stageRef.current,
             pinSpacing: true,
             anticipatePin: 1,
@@ -80,10 +90,10 @@ export const FrameToFullscreen: React.FC<Props> = ({ titleComponent, children })
         tl.to(
           frameRef.current,
           {
-            rotateX: 15,
-            scaleX: startScaleX * 0.93,
-            scaleY: startScaleY * 0.93,
-            y: 20 - padBottom,
+            rotateX: isMobile ? 2 : 15,
+            scaleX: startScaleX * (isMobile ? 0.99 : 0.93),
+            scaleY: startScaleY * (isMobile ? 0.99 : 0.93),
+            y: (isMobile ? 10 : 20) - padBottom,
             duration: 0.5,
             ease: "power1.out",
           },
@@ -94,7 +104,7 @@ export const FrameToFullscreen: React.FC<Props> = ({ titleComponent, children })
         tl.to(
           titleRef.current,
           {
-            y: -60,
+            y: isMobile ? -30 : -60,
             opacity: 0,
             duration: 0.2,
             ease: "sine.inOut",
@@ -170,7 +180,7 @@ export const FrameToFullscreen: React.FC<Props> = ({ titleComponent, children })
       <section
         ref={sectionRef}
         className="relative w-full"
-        style={{ height: "210vh" }}
+        style={{ height: sectionHeight }}
       >
         <div
           ref={stageRef}
