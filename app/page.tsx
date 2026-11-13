@@ -51,18 +51,15 @@ export default function Home() {
         scrollDistance="+=90%"
         label={
           <div className="flex flex-col items-center gap-4 text-center px-4">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[#c8a882]/40 bg-[#c8a882]/10 backdrop-blur-md px-4 py-1.5 text-xs font-mono uppercase tracking-[0.3em] text-[#e8d5c0] shadow-[0_0_24px_rgba(200,168,130,0.25)]">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#c8a882]/40 bg-[#08080c]/90 backdrop-blur-md px-4 py-1.5 text-xs font-mono uppercase tracking-[0.3em] text-[#e8d5c0] shadow-[0_0_24px_rgba(200,168,130,0.25)]">
               <span>DIRECT ACCESS · VIP PROTOCOL</span>
             </div>
-            <span
-              className="text-[clamp(2.5rem,8vw,7.5rem)] font-bold uppercase leading-[0.92] tracking-tight flex flex-col items-center text-white"
-              style={{ fontFamily: "var(--font-display), Georgia, serif" }}
-            >
-              <span>CONNECT</span>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-[#f0e2d3] to-[#c8a882]">
-                WITH JAY
+            <div className="text-[clamp(2.5rem,8.5vw,7.5rem)] font-extrabold uppercase leading-[0.92] tracking-tight flex flex-col items-center drop-shadow-[0_10px_40px_rgba(0,0,0,0.95)]">
+              <span className="text-white">CONNECT</span>
+              <span className="text-white">
+                WITH <span className="text-[#f5dfc6]">JAY</span>
               </span>
-            </span>
+            </div>
             <p className="text-xs sm:text-sm font-mono uppercase tracking-[0.3em] text-[#a8a398] max-w-md">
               Executive Channels &amp; Direct Priority Dispatch
             </p>

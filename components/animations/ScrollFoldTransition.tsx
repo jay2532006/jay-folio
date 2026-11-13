@@ -214,7 +214,7 @@ export const ScrollFoldTransition: React.FC<Props> = ({
         {/* Seam glow */}
         <div
           ref={seamRef}
-          className="absolute left-0 top-1/2 -translate-y-1/2 w-full h-[3px] will-change-transform"
+          className="absolute left-0 top-1/2 -translate-y-1/2 w-full h-[3px] will-change-transform z-10 pointer-events-none"
           style={{
             background: `linear-gradient(90deg, transparent 0%, ${seamColor} 50%, transparent 100%)`,
             boxShadow: `0 0 30px ${seamColor}, 0 0 60px ${seamColor}66`,
@@ -266,7 +266,7 @@ export const ScrollFoldTransition: React.FC<Props> = ({
         {/* Center label */}
         <div
           ref={labelRef}
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 will-change-transform text-center"
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 will-change-transform text-center z-20 pointer-events-none"
           style={{ color: "#f0ece4" }}
         >
           {label}
