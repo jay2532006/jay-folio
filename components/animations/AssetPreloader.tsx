@@ -83,6 +83,8 @@ function injectPrefetch(href: string) {
 
 function buildQueue(): string[] {
   const urls: string[] = [];
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+  const targetWidth = isMobile ? 640 : 1080;
 
   // Raw assets — warms the browser disk cache for <img>, ProfileCard avatar
   // and every `background-image: url(...)` in scroll-tilted-grid / scroll-stack.
@@ -90,12 +92,9 @@ function buildQueue(): string[] {
     urls.push(path);
   }
 
-  // Optimizer variants — primes /_next/image transforms at common widths so
-  // when next/image actually mounts, the response is already cached.
+  // Optimizer variants — primes /_next/image transforms at mobile/desktop appropriate width
   for (const path of NEXT_IMAGE_PATHS) {
-    for (const w of PREWARM_WIDTHS) {
-      urls.push(`/_next/image?url=${encodeURIComponent(path)}&w=${w}&q=75`);
-    }
+    urls.push(`/_next/image?url=${encodeURIComponent(path)}&w=${targetWidth}&q=75`);
   }
 
   return urls;

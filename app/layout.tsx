@@ -12,7 +12,7 @@ const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["400", "500"],
   display: "swap",
-  preload: false,
+  preload: true,
 });
 
 const dmSans = DM_Sans({

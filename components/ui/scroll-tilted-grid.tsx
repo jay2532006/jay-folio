@@ -268,7 +268,7 @@ export type ScrollTiltedGridProps = {
 export function ScrollTiltedGrid({
   images = DEFAULT_GRID_IMAGES,
   loop = false,
-  initialCycles = 3,
+  initialCycles = 2,
   aspectRatio = "3/4",
   gap = 10,
   perspective = 900,
@@ -279,6 +279,12 @@ export function ScrollTiltedGrid({
 }: ScrollTiltedGridProps = {}) {
   const [cycles, setCycles] = useState(initialCycles);
   const sentinelRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.innerWidth < 768) {
+      setCycles(1);
+    }
+  }, []);
 
   useEffect(() => {
     if (!loop) return;

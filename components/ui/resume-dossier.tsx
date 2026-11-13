@@ -253,7 +253,7 @@ export default function ResumeDossier() {
                     src={SITE.portraitUrl}
                     alt="Jay Parmar · Indian Institute of Management Bangalore"
                     fill
-                    priority
+                    loading="lazy"
                     sizes="(max-width: 1024px) 100vw, 540px"
                     className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
                   />
@@ -635,6 +635,7 @@ export default function ResumeDossier() {
                     src={cert.image}
                     alt={cert.title}
                     fill
+                    loading="lazy"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
                   />

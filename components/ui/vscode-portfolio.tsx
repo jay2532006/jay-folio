@@ -904,7 +904,7 @@ export const VSCodePortfolio: React.FC = () => {
                                 // doesn't lazy-defer it. Everything else is
                                 // pre-warmed by AssetPreloader during idle.
                                 priority={i === 0}
-                                loading="eager"
+                                loading={i === 0 ? "eager" : "lazy"}
                                 fetchPriority={i === 0 ? "high" : "low"}
                                 className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.08]"
                                 style={{ objectPosition: "center top" }}

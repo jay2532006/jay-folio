@@ -126,9 +126,13 @@ const LightRays = ({
       await new Promise((resolve) => setTimeout(resolve, 10));
       if (!containerRef.current) return;
 
-      // Cap DPR at 1.0 on mobile / 1.5 on desktop — keeps gradient indistinguishable while avoiding 4-9x fragment shader load
+      // Skip heavy WebGL noise shaders on mobile to keep 120Hz smooth native scroll & avoid GPU throttling
       const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
-      const targetDpr = isMobile ? 1.0 : 1.5;
+      if (isMobile) {
+        return;
+      }
+
+      const targetDpr = 1.5;
       const renderer = new Renderer({
         dpr: Math.min(window.devicePixelRatio || 1, targetDpr),
         alpha: true,

@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useRef } from 'react';
+import { useMemo, useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, MotionValue } from 'framer-motion';
 import { useContainerScroll } from '@/components/ui/container-scroll-animation';
 
@@ -51,6 +51,11 @@ const ScrollFloat = ({
 }: ScrollFloatProps) => {
   const containerRef = useRef<HTMLSpanElement>(null);
   const containerScroll = useContainerScroll();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+  }, []);
 
   const { scrollYProgress: ownScroll } = useScroll({
     target: containerRef,
@@ -78,6 +83,16 @@ const ScrollFloat = ({
       return { start, end };
     });
   }, [chars, stagger]);
+
+  if (isMobile) {
+    return (
+      <span ref={containerRef} className={`scroll-float ${containerClassName}`} style={style}>
+        <span className={`scroll-float-text ${textClassName} inline-block font-bold tracking-tight text-white`}>
+          {children}
+        </span>
+      </span>
+    );
+  }
 
   return (
     <span ref={containerRef} className={`scroll-float ${containerClassName}`} style={style}>

@@ -11,37 +11,14 @@ export function SplineSceneBasic() {
   const [loadScene, setLoadScene] = useState(false);
 
   useEffect(() => {
-    // 1. Warm up the 3D runtime eagerly in the background on first scroll or touch
-    const startWarmUp = () => {
-      setLoadScene(true);
-      cleanupListeners();
-    };
-
-    const cleanupListeners = () => {
-      if (typeof window !== "undefined") {
-        window.removeEventListener("scroll", startWarmUp);
-        window.removeEventListener("pointerdown", startWarmUp);
-        window.removeEventListener("touchstart", startWarmUp);
-      }
-    };
-
-    if (typeof window !== "undefined") {
-      if (window.scrollY > 10) {
-        setLoadScene(true);
-      } else {
-        window.addEventListener("scroll", startWarmUp, { passive: true });
-        window.addEventListener("pointerdown", startWarmUp, { passive: true });
-        window.addEventListener("touchstart", startWarmUp, { passive: true });
-      }
-    }
-
-    // 2. IntersectionObserver for Spotlight + fallback scene loading
+    // Only load the heavy 3D Spline scene when the user approaches this section (rootMargin: 350px)
+    // This frees 100% of network & CPU bandwidth for the Hero, transitions, and photos on mobile.
     if (!cardRef.current) return;
     const el = cardRef.current;
     const io = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.15) {
+          if (entry.isIntersecting) {
             setSpotlightArmed(true);
             setLoadScene(true);
             io.disconnect();
@@ -49,13 +26,12 @@ export function SplineSceneBasic() {
           }
         }
       },
-      { threshold: [0, 0.15, 0.3, 0.5] }
+      { rootMargin: "350px 0px" }
     );
     io.observe(el);
 
     return () => {
       io.disconnect();
-      cleanupListeners();
     };
   }, []);
 

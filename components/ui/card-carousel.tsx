@@ -179,6 +179,8 @@ export const CardCarousel: React.FC<CarouselProps> = ({
                         src={image.src}
                         width={500}
                         height={750}
+                        sizes="(max-width: 640px) 320px, 500px"
+                        loading="lazy"
                         className="rounded-xl"
                         style={{
                           width: "100%",
