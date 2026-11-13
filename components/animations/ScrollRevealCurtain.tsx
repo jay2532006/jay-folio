@@ -68,7 +68,7 @@ export const ScrollRevealCurtain: React.FC<Props> = ({
           trigger: sectionRef.current,
           start: "top top",
           end: scrollDistance,
-          scrub: 0.4,
+          scrub: 0.75,
           pin: stageRef.current,
           pinSpacing: true,
           anticipatePin: 1,

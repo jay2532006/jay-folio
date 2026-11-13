@@ -69,7 +69,7 @@ export const FrameToFullscreen: React.FC<Props> = ({ titleComponent, children })
             trigger: sectionRef.current,
             start: "top top",
             end: "+=110%",
-            scrub: 0.55,
+            scrub: 0.8,
             pin: stageRef.current,
             pinSpacing: true,
             anticipatePin: 1,

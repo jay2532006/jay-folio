@@ -125,25 +125,25 @@ export default function ResumeDossier() {
         <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#c8a882] shrink-0 font-bold pl-1 pr-2 border-r border-white/10">
           Index
         </span>
-        <a href="#dossier-overview" className="text-[11px] font-mono text-neutral-300 hover:text-white px-2.5 py-1 rounded-full bg-white/[0.04] shrink-0">
+        <a href="#dossier-overview" className="text-[11px] font-mono text-neutral-300 hover:text-white active:scale-95 active:bg-white/15 px-2.5 py-1 rounded-full bg-white/[0.04] shrink-0 transition-all duration-150">
           Overview
         </a>
-        <a href="#dossier-education" className="text-[11px] font-mono text-neutral-300 hover:text-white px-2.5 py-1 rounded-full bg-white/[0.04] shrink-0">
+        <a href="#dossier-education" className="text-[11px] font-mono text-neutral-300 hover:text-white active:scale-95 active:bg-white/15 px-2.5 py-1 rounded-full bg-white/[0.04] shrink-0 transition-all duration-150">
           Academics
         </a>
-        <a href="#dossier-experience" className="text-[11px] font-mono text-neutral-300 hover:text-white px-2.5 py-1 rounded-full bg-white/[0.04] shrink-0">
+        <a href="#dossier-experience" className="text-[11px] font-mono text-neutral-300 hover:text-white active:scale-95 active:bg-white/15 px-2.5 py-1 rounded-full bg-white/[0.04] shrink-0 transition-all duration-150">
           Experience
         </a>
-        <a href="#dossier-builds" className="text-[11px] font-mono text-neutral-300 hover:text-white px-2.5 py-1 rounded-full bg-white/[0.04] shrink-0">
+        <a href="#dossier-builds" className="text-[11px] font-mono text-neutral-300 hover:text-white active:scale-95 active:bg-white/15 px-2.5 py-1 rounded-full bg-white/[0.04] shrink-0 transition-all duration-150">
           Systems
         </a>
-        <a href="#dossier-honors" className="text-[11px] font-mono text-neutral-300 hover:text-white px-2.5 py-1 rounded-full bg-white/[0.04] shrink-0">
+        <a href="#dossier-honors" className="text-[11px] font-mono text-neutral-300 hover:text-white active:scale-95 active:bg-white/15 px-2.5 py-1 rounded-full bg-white/[0.04] shrink-0 transition-all duration-150">
           Honors
         </a>
-        <a href="#dossier-credentials" className="text-[11px] font-mono text-neutral-300 hover:text-white px-2.5 py-1 rounded-full bg-white/[0.04] shrink-0">
+        <a href="#dossier-credentials" className="text-[11px] font-mono text-neutral-300 hover:text-white active:scale-95 active:bg-white/15 px-2.5 py-1 rounded-full bg-white/[0.04] shrink-0 transition-all duration-150">
           Certs
         </a>
-        <a href="#dossier-skills" className="text-[11px] font-mono text-neutral-300 hover:text-white px-2.5 py-1 rounded-full bg-white/[0.04] shrink-0">
+        <a href="#dossier-skills" className="text-[11px] font-mono text-neutral-300 hover:text-white active:scale-95 active:bg-white/15 px-2.5 py-1 rounded-full bg-white/[0.04] shrink-0 transition-all duration-150">
           Skills
         </a>
       </nav>

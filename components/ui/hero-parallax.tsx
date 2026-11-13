@@ -227,10 +227,15 @@ export const ProductCard = ({
           "0 30px 80px -30px rgba(0,0,0,0.7), 0 0 0 1px rgba(167,139,250,0.10), inset 0 1px 0 rgba(255,255,255,0.06)",
       }}
       whileHover={{
-        y: -20,
+        y: -14,
+        scale: 1.02,
       }}
+      whileTap={{
+        scale: 0.96,
+      }}
+      transition={{ type: "spring", stiffness: 350, damping: 25 }}
       key={product.title}
-      className="group/product h-80 w-[22rem] relative flex-shrink-0 overflow-hidden rounded-[24px]"
+      className="group/product h-80 w-[22rem] relative flex-shrink-0 overflow-hidden rounded-[24px] cursor-pointer"
     >
       <Link
         href={product.link}

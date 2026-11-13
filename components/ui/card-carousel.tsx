@@ -152,10 +152,11 @@ export const CardCarousel: React.FC<CarouselProps> = ({
                 loop={true}
                 slidesPerView={"auto"}
                 coverflowEffect={{
-                  rotate: 0,
+                  rotate: 18,
                   stretch: 0,
-                  depth: 100,
-                  modifier: 2.5,
+                  depth: 130,
+                  modifier: 1.5,
+                  slideShadows: false,
                 }}
                 pagination={showPagination}
                 navigation={

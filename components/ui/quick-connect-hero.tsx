@@ -73,7 +73,7 @@ export default function QuickConnectHero() {
             href="https://www.linkedin.com/in/jay-parmar-ai"
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative rounded-2xl border border-[#0077b5]/40 bg-[#0077b5]/10 p-6 flex flex-col justify-between hover:bg-[#0077b5]/15 hover:border-[#0077b5]/70 transition-all hover:-translate-y-1 shadow-lg min-h-[160px]"
+            className="group relative rounded-2xl border border-[#0077b5]/40 bg-[#0077b5]/10 p-6 flex flex-col justify-between hover:bg-[#0077b5]/15 hover:border-[#0077b5]/70 active:scale-[0.97] active:brightness-110 active:border-[#0077b5] transition-all duration-200 hover:-translate-y-1 shadow-lg min-h-[160px]"
           >
             <div className="flex items-center justify-between">
               <div className="w-10 h-10 rounded-xl bg-[#0077b5] text-white flex items-center justify-center font-bold text-sm shadow-md">
@@ -93,14 +93,14 @@ export default function QuickConnectHero() {
           </a>
 
           {/* 2. Direct Email */}
-          <div className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 flex flex-col justify-between hover:border-[#c8a882]/40 transition-all hover:-translate-y-1 shadow-lg min-h-[160px]">
+          <div className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 flex flex-col justify-between hover:border-[#c8a882]/40 active:scale-[0.97] active:brightness-110 active:border-[#c8a882]/60 transition-all duration-200 hover:-translate-y-1 shadow-lg min-h-[160px]">
             <div className="flex items-center justify-between">
               <div className="w-10 h-10 rounded-xl bg-white/[0.06] border border-white/10 text-[#c8a882] flex items-center justify-center">
                 <Mail className="h-5 w-5" />
               </div>
               <button
                 onClick={handleCopyEmail}
-                className="inline-flex items-center gap-1 text-xs font-mono text-neutral-400 hover:text-white transition-colors"
+                className="inline-flex items-center gap-1 text-xs font-mono text-neutral-400 hover:text-white active:scale-90 transition-all duration-150"
                 title="Copy Email Address"
               >
                 {copied ? (
@@ -128,7 +128,7 @@ export default function QuickConnectHero() {
           {/* 3. Phone / Direct Call */}
           <a
             href="tel:+917773060203"
-            className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 flex flex-col justify-between hover:border-[#c8a882]/40 transition-all hover:-translate-y-1 shadow-lg min-h-[160px]"
+            className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 flex flex-col justify-between hover:border-[#c8a882]/40 active:scale-[0.97] active:brightness-110 active:border-[#c8a882]/60 transition-all duration-200 hover:-translate-y-1 shadow-lg min-h-[160px]"
           >
             <div className="flex items-center justify-between">
               <div className="w-10 h-10 rounded-xl bg-white/[0.06] border border-white/10 text-[#c8a882] flex items-center justify-center">
@@ -152,7 +152,7 @@ export default function QuickConnectHero() {
             href={SITE.resumeUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="group rounded-2xl border border-[#c8a882]/40 bg-[#c8a882]/10 p-6 flex flex-col justify-between hover:bg-[#c8a882]/15 hover:border-[#c8a882] transition-all hover:-translate-y-1 shadow-lg min-h-[160px]"
+            className="group rounded-2xl border border-[#c8a882]/40 bg-[#c8a882]/10 p-6 flex flex-col justify-between hover:bg-[#c8a882]/15 hover:border-[#c8a882] active:scale-[0.97] active:brightness-110 active:border-[#c8a882] transition-all duration-200 hover:-translate-y-1 shadow-lg min-h-[160px]"
           >
             <div className="flex items-center justify-between">
               <div className="w-10 h-10 rounded-xl bg-[#c8a882] text-black flex items-center justify-center font-bold">
