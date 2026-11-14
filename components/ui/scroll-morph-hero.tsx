@@ -250,6 +250,7 @@ export default function IntroAnimation({ scrollProgress }: IntroAnimationProps =
     const [rotateValue, setRotateValue] = useState(0);
     const [parallaxValue, setParallaxValue] = useState(0);
     const [autoRotate, setAutoRotate] = useState(0);
+    const [isInView, setIsInView] = useState(false);
     const morphValueRef = useRef(0);
     const autoRotateRef = useRef(0);
     const isPausedRef = useRef(false);
@@ -257,6 +258,16 @@ export default function IntroAnimation({ scrollProgress }: IntroAnimationProps =
     useEffect(() => {
         morphValueRef.current = morphValue;
     }, [morphValue]);
+
+    useEffect(() => {
+        const container = containerRef.current;
+        if (!container) return;
+        const io = new IntersectionObserver(([entry]) => {
+            setIsInView(entry.isIntersecting);
+        }, { threshold: 0.05 });
+        io.observe(container);
+        return () => io.disconnect();
+    }, []);
 
     useEffect(() => {
         const container = containerRef.current;
@@ -272,10 +283,11 @@ export default function IntroAnimation({ scrollProgress }: IntroAnimationProps =
     }, []);
 
     useEffect(() => {
+        if (!isInView) return;
         let rafId: number;
         let lastTime = performance.now();
         const tick = (time: number) => {
-            const dt = time - lastTime;
+            const dt = Math.min(time - lastTime, 100);
             lastTime = time;
             if (morphValueRef.current >= 0.95 && !isPausedRef.current) {
                 autoRotateRef.current += dt * 0.004;
@@ -285,7 +297,7 @@ export default function IntroAnimation({ scrollProgress }: IntroAnimationProps =
         };
         rafId = requestAnimationFrame(tick);
         return () => cancelAnimationFrame(rafId);
-    }, []);
+    }, [isInView]);
 
     useEffect(() => {
         const unsubscribeMorph = smoothMorph.on("change", setMorphValue);

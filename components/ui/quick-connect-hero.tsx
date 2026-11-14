@@ -83,10 +83,10 @@ export default function QuickConnectHero() {
         className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/[0.08] to-transparent"
       />
 
-      {/* Volumetric Radial Glows */}
+      {/* Volumetric Radial Glows - lightweight on mobile to preserve GPU fill-rate */}
       <div
         aria-hidden
-        className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[500px] opacity-20 blur-[160px]"
+        className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[500px] opacity-20 blur-3xl md:blur-[120px]"
         style={{
           background:
             "radial-gradient(ellipse at center, rgba(200,168,130,0.35), transparent 70%)",
@@ -139,7 +139,7 @@ export default function QuickConnectHero() {
               target={ch.target}
               rel={ch.rel}
               aria-label={`Open ${ch.name}`}
-              className={`group relative rounded-3xl border border-white/[0.12] ${ch.borderHover} bg-gradient-to-b from-white/[0.05] via-white/[0.015] to-black/75 backdrop-blur-2xl p-6 sm:p-8 flex flex-col items-center justify-center min-h-[200px] sm:min-h-[240px] md:min-h-[270px] transition-all duration-300 hover:-translate-y-3 hover:scale-[1.04] ${ch.shadowHover} active:scale-95 cursor-pointer overflow-hidden`}
+              className={`group relative rounded-3xl border border-white/[0.12] ${ch.borderHover} bg-gradient-to-b from-white/[0.05] via-white/[0.015] to-black/75 backdrop-blur-md md:backdrop-blur-xl p-6 sm:p-8 flex flex-col items-center justify-center min-h-[200px] sm:min-h-[240px] md:min-h-[270px] transition-all duration-300 hover:-translate-y-3 hover:scale-[1.04] ${ch.shadowHover} active:scale-95 cursor-pointer overflow-hidden`}
             >
               {/* Top specular reflection sweep */}
               <div
@@ -153,7 +153,7 @@ export default function QuickConnectHero() {
                 className="pointer-events-none absolute inset-0 flex items-center justify-center"
               >
                 <div
-                  className="w-36 h-36 sm:w-44 sm:h-44 rounded-full blur-2xl opacity-40 group-hover:opacity-90 group-hover:scale-125 transition-all duration-500"
+                  className="w-36 h-36 sm:w-44 sm:h-44 rounded-full blur-xl md:blur-2xl opacity-40 group-hover:opacity-90 group-hover:scale-125 transition-all duration-500"
                   style={{ background: ch.haloGradient }}
                 />
               </div>
@@ -168,7 +168,7 @@ export default function QuickConnectHero() {
                       width={112}
                       height={112}
                       className="object-contain filter drop-shadow-[0_8px_24px_rgba(0,0,0,0.6)]"
-                      priority
+                      loading="lazy"
                     />
                   </div>
                 ) : (

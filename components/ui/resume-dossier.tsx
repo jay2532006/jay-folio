@@ -42,7 +42,7 @@ export default function ResumeDossier() {
       {/* Ambient Atmospheric Lighting - Expansive across full monitor width */}
       <div
         aria-hidden
-        className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[1920px] h-[800px] opacity-25 blur-[180px]"
+        className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[1920px] h-[800px] opacity-25 blur-2xl md:blur-[100px]"
         style={{
           background:
             "radial-gradient(ellipse at top, rgba(200,168,130,0.3), transparent 70%)",
@@ -50,7 +50,7 @@ export default function ResumeDossier() {
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute top-[30%] -left-48 w-[800px] h-[800px] opacity-15 blur-[220px]"
+        className="pointer-events-none absolute top-[30%] -left-48 w-[800px] h-[800px] opacity-15 blur-2xl md:blur-[100px]"
         style={{
           background:
             "radial-gradient(circle, rgba(167,139,250,0.25), transparent 70%)",
@@ -58,7 +58,7 @@ export default function ResumeDossier() {
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute top-[65%] -right-48 w-[800px] h-[800px] opacity-20 blur-[220px]"
+        className="pointer-events-none absolute top-[65%] -right-48 w-[800px] h-[800px] opacity-20 blur-2xl md:blur-[100px]"
         style={{
           background:
             "radial-gradient(circle, rgba(200,168,130,0.25), transparent 70%)",
@@ -68,7 +68,7 @@ export default function ResumeDossier() {
       {/* Floating Chapter Index Nav - Desktop */}
       <nav
         aria-label="Dossier section navigation"
-        className="sticky top-6 z-40 mx-auto max-w-max hidden md:flex items-center gap-2 rounded-full border border-white/15 bg-[#0d0d12]/90 backdrop-blur-2xl px-6 py-3 shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
+        className="sticky top-6 z-40 mx-auto max-w-max hidden md:flex items-center gap-2 rounded-full border border-white/15 bg-[#0d0d12]/90 backdrop-blur-md md:backdrop-blur-xl px-6 py-3 shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
       >
         <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#c8a882] pr-3 border-r border-white/10 font-bold">
           Dossier Index
@@ -120,7 +120,7 @@ export default function ResumeDossier() {
       {/* Floating Chapter Index Nav - Mobile Scrollable Strip */}
       <nav
         aria-label="Dossier mobile navigation"
-        className="sticky top-4 z-40 mx-3 flex md:hidden items-center gap-2 rounded-full border border-white/15 bg-[#0d0d12]/95 backdrop-blur-2xl px-3 py-2 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden shadow-2xl"
+        className="sticky top-4 z-40 mx-3 flex md:hidden items-center gap-2 rounded-full border border-white/15 bg-[#0d0d12]/95 backdrop-blur-md px-3 py-2 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden shadow-2xl"
       >
         <span className="text-[10px] font-mono uppercase tracking-[0.18em] text-[#c8a882] shrink-0 font-bold pl-1 pr-2 border-r border-white/10">
           Index

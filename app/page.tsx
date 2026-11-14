@@ -1,22 +1,29 @@
+import dynamic from "next/dynamic";
 import FrameToFullscreen from "@/components/animations/FrameToFullscreen";
 import ScrollFloat from "@/components/animations/ScrollFloat";
 import { ScrollRevealCurtain } from "@/components/animations/ScrollRevealCurtain";
-import ScrollWarpPortal from "@/components/animations/ScrollWarpPortal";
 import ScrollFoldTransition from "@/components/animations/ScrollFoldTransition";
 import VSCodePortfolio from "@/components/ui/vscode-portfolio";
-import { SplineSceneBasic } from "@/components/ui/spline-scene-basic";
-import StoryScrollDemo from "@/components/ui/story-scroll-demo";
-import HeroParallaxDemo from "@/components/ui/hero-parallax-demo";
-import ScrollMorphSection from "@/components/ui/scroll-morph-section";
-import ScrollTiltedGridDemo from "@/components/ui/scroll-tilted-grid-demo";
-import CardCarouselDemo from "@/components/ui/card-carousel-demo";
-import LightRays from "@/components/ui/LightRays";
-import ZoomParallaxDemo from "@/components/ui/zoom-parallax-demo";
-import ResumeDossier from "@/components/ui/resume-dossier";
 import QuickConnectHero from "@/components/ui/quick-connect-hero";
-import ProfileCard from "@/components/ui/ProfileCard";
-import FooterDemo from "@/components/ui/footer-demo";
-import { ScrollReveal } from "@/components/animations/ScrollReveal";
+
+// Below-the-fold dynamic imports for bundle splitting & faster mobile First Contentful Paint
+const SplineSceneBasic = dynamic(
+  () => import("@/components/ui/spline-scene-basic").then((m) => m.SplineSceneBasic)
+);
+const StoryScrollDemo = dynamic(() => import("@/components/ui/story-scroll-demo"));
+const ScrollWarpPortal = dynamic(() => import("@/components/animations/ScrollWarpPortal"));
+const HeroParallaxDemo = dynamic(() => import("@/components/ui/hero-parallax-demo"));
+const ScrollMorphSection = dynamic(() => import("@/components/ui/scroll-morph-section"));
+const ScrollTiltedGridDemo = dynamic(() => import("@/components/ui/scroll-tilted-grid-demo"));
+const LightRays = dynamic(() => import("@/components/ui/LightRays"));
+const CardCarouselDemo = dynamic(() => import("@/components/ui/card-carousel-demo"));
+const ZoomParallaxDemo = dynamic(() => import("@/components/ui/zoom-parallax-demo"));
+const ResumeDossier = dynamic(() => import("@/components/ui/resume-dossier"));
+const ProfileCard = dynamic(() => import("@/components/ui/ProfileCard"));
+const FooterDemo = dynamic(() => import("@/components/ui/footer-demo"));
+const ScrollReveal = dynamic(
+  () => import("@/components/animations/ScrollReveal").then((m) => m.ScrollReveal)
+);
 
 export default function Home() {
   return (

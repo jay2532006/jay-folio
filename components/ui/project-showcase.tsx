@@ -74,26 +74,46 @@ export function ProjectShowcase() {
   const animationRef = useRef<number | null>(null);
 
   useEffect(() => {
+    if (hoveredIndex === null) {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+        animationRef.current = null;
+      }
+      return;
+    }
+
     const lerp = (start: number, end: number, factor: number) => {
       return start + (end - start) * factor;
     };
 
+    let active = true;
     const animate = () => {
-      setSmoothPosition((prev) => ({
-        x: lerp(prev.x, mousePosition.x, 0.15),
-        y: lerp(prev.y, mousePosition.y, 0.15),
-      }));
-      animationRef.current = requestAnimationFrame(animate);
+      if (!active) return;
+      setSmoothPosition((prev) => {
+        const dx = Math.abs(prev.x - mousePosition.x);
+        const dy = Math.abs(prev.y - mousePosition.y);
+        // If already converged within 0.5px, stop continuous RAF until mouse moves
+        if (dx < 0.5 && dy < 0.5) {
+          return { x: mousePosition.x, y: mousePosition.y };
+        }
+        animationRef.current = requestAnimationFrame(animate);
+        return {
+          x: lerp(prev.x, mousePosition.x, 0.15),
+          y: lerp(prev.y, mousePosition.y, 0.15),
+        };
+      });
     };
 
     animationRef.current = requestAnimationFrame(animate);
 
     return () => {
+      active = false;
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
+        animationRef.current = null;
       }
     };
-  }, [mousePosition]);
+  }, [hoveredIndex, mousePosition]);
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (containerRef.current) {

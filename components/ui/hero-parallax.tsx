@@ -23,6 +23,20 @@ export const HeroParallax = ({
   const firstRow = products.slice(0, 4);
   const secondRow = products.slice(4, 8);
   const thirdRow = products.slice(8, 12);
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile, { passive: true });
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // Deduplicate rows on mobile to prevent 24 3D transform cards/images from starving mobile GPU
+  const r1 = isMobile ? firstRow : [...firstRow, ...firstRow];
+  const r2 = isMobile ? secondRow : [...secondRow, ...secondRow];
+  const r3 = isMobile ? thirdRow : [...thirdRow, ...thirdRow];
+
   const ref = React.useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -72,9 +86,9 @@ export const HeroParallax = ({
       >
         <motion.div
           className="flex flex-row-reverse"
-          style={{ gap: "72px", marginBottom: "88px" }}
+          style={{ gap: isMobile ? "36px" : "72px", marginBottom: isMobile ? "44px" : "88px" }}
         >
-          {[...firstRow, ...firstRow].map((product, i) => (
+          {r1.map((product, i) => (
             <ProductCard
               product={product}
               translate={translateX}
@@ -84,9 +98,9 @@ export const HeroParallax = ({
         </motion.div>
         <motion.div
           className="flex flex-row"
-          style={{ gap: "72px", marginBottom: "88px" }}
+          style={{ gap: isMobile ? "36px" : "72px", marginBottom: isMobile ? "44px" : "88px" }}
         >
-          {[...secondRow, ...secondRow].map((product, i) => (
+          {r2.map((product, i) => (
             <ProductCard
               product={product}
               translate={translateXReverse}
@@ -96,9 +110,9 @@ export const HeroParallax = ({
         </motion.div>
         <motion.div
           className="flex flex-row-reverse"
-          style={{ gap: "72px" }}
+          style={{ gap: isMobile ? "36px" : "72px" }}
         >
-          {[...thirdRow, ...thirdRow].map((product, i) => (
+          {r3.map((product, i) => (
             <ProductCard
               product={product}
               translate={translateX}

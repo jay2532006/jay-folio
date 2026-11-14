@@ -11,7 +11,7 @@ export function SplineSceneBasic() {
   const [loadScene, setLoadScene] = useState(false);
 
   useEffect(() => {
-    // Only load the heavy 3D Spline scene when the user approaches this section (rootMargin: 350px)
+    // Only load the heavy 3D Spline scene when the user approaches this section (rootMargin: 600px)
     // This frees 100% of network & CPU bandwidth for the Hero, transitions, and photos on mobile.
     if (!cardRef.current) return;
     const el = cardRef.current;
@@ -26,7 +26,7 @@ export function SplineSceneBasic() {
           }
         }
       },
-      { rootMargin: "350px 0px" }
+      { rootMargin: "600px 0px" }
     );
     io.observe(el);
 
